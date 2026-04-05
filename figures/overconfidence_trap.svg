@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="280" fill="#080810" rx="12"/>
+
+  <text x="450" y="30" fill="#e0e0f0" font-size="14" font-weight="600" text-anchor="middle">The Overconfidence Trap</text>
+  <text x="450" y="50" fill="#6e6e88" font-size="11" text-anchor="middle">Log-probability INCREASES as the model approaches the cliff, then output collapses</text>
+
+  <g transform="translate(80, 70)">
+    <!-- Axes -->
+    <line x1="0" y1="170" x2="740" y2="170" stroke="#1e1e2e" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="170" stroke="#1e1e2e" stroke-width="1"/>
+
+    <text x="-55" y="90" fill="#888" font-size="10" transform="rotate(-90 -55 90)">Model confidence</text>
+    <text x="370" y="195" fill="#888" font-size="10" text-anchor="middle">a (emotion dimension)</text>
+
+    <text x="0" y="185" fill="#666" font-size="8" text-anchor="middle">0</text>
+    <text x="185" y="185" fill="#666" font-size="8" text-anchor="middle">+1.0</text>
+    <text x="370" y="185" fill="#666" font-size="8" text-anchor="middle">+1.5</text>
+    <text x="555" y="185" fill="#666" font-size="8" text-anchor="middle">+1.8</text>
+    <text x="647" y="185" fill="#666" font-size="8" text-anchor="middle">+2.0</text>
+    <text x="740" y="185" fill="#666" font-size="8" text-anchor="middle">+2.5</text>
+
+    <!-- Confidence line: RISING to cliff -->
+    <polyline points="0,140 37,135 74,130 111,125 148,118 185,110 222,100 259,90 296,82 333,70 370,58 407,48 444,38 481,30 518,22 555,15"
+              fill="none" stroke="#42a5f5" stroke-width="2.5"/>
+
+    <!-- After cliff: stays high but output is garbage -->
+    <polyline points="555,15 592,10 630,8 667,10 704,8 740,9"
+              fill="none" stroke="#ef5350" stroke-width="2.5" stroke-dasharray="6 3"/>
+
+    <!-- Cliff marker -->
+    <line x1="555" y1="0" x2="555" y2="170" stroke="#ef5350" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+    <!-- Annotation: before cliff -->
+    <rect x="340" y="60" width="190" height="50" rx="8" fill="rgba(66,165,245,0.08)" stroke="#42a5f5" stroke-width="1"/>
+    <text x="435" y="78" fill="#42a5f5" font-size="10" text-anchor="middle" font-weight="600">Confidence RISING</text>
+    <text x="435" y="94" fill="#42a5f5" font-size="9" text-anchor="middle" opacity="0.7">Model thinks it's doing great</text>
+
+    <!-- Annotation: after cliff -->
+    <rect x="582" y="30" width="150" height="55" rx="8" fill="rgba(239,83,80,0.08)" stroke="#ef5350" stroke-width="1"/>
+    <text x="657" y="48" fill="#ef5350" font-size="10" text-anchor="middle" font-weight="600">Output COLLAPSED</text>
+    <text x="657" y="63" fill="#ef5350" font-size="9" text-anchor="middle" opacity="0.7">But confidence stays high!</text>
+    <text x="657" y="78" fill="#ef5350" font-size="9" text-anchor="middle" opacity="0.7">Repetition rate: 36%</text>
+
+    <!-- Arrow pointing to the trap -->
+    <path d="M 555 110 L 555 155" fill="none" stroke="#ffa726" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="555" y="168" fill="#ffa726" font-size="9" font-weight="600" text-anchor="middle">CLIFF</text>
+  </g>
+
+  <!-- Takeaway -->
+  <text x="450" y="265" fill="#ffa726" font-size="12" text-anchor="middle" font-weight="500">The model does not know it's about to crash. Perplexity alone cannot detect the boundary.</text>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M 0 0 L 8 3 L 0 6 z" fill="#ffa726"/>
+    </marker>
+  </defs>
+</svg>
