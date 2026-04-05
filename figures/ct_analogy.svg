@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="system-ui, -apple-system, sans-serif">
   <defs>
     <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
@@ -10,32 +11,32 @@
 
   <!-- LEFT: CT -->
   <rect x="30" y="20" width="380" height="260" rx="12" fill="#111119" stroke="#1e1e2e" stroke-width="1"/>
-  <text x="220" y="50" fill="#4fc3f7" font-size="14" font-weight="600" text-anchor="middle"><å CT  q;fÏ	</text>
+  <text x="220" y="50" fill="#4fc3f7" font-size="14" font-weight="600" text-anchor="middle">CT Contrast Imaging</text>
 
   <g transform="translate(50, 70)" font-size="12">
-    <text fill="#6e6e88" font-size="10" y="0"> qB</text>
-    <text fill="#ccc" x="90" y="0">˜ú¶²</text>
+    <text fill="#6e6e88" font-size="10" y="0">Contrast agent</text>
+    <text fill="#ccc" x="110" y="0">Iodine-based solution</text>
     <line x1="0" y1="10" x2="340" y2="10" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="30">èeBÏ</text>
-    <text fill="#ccc" x="90" y="30">1mL ’ 5mL ’ 10mL</text>
+    <text fill="#6e6e88" font-size="10" y="30">Dosage sweep</text>
+    <text fill="#ccc" x="110" y="30">1mL ? 5mL ? 10mL</text>
     <line x1="0" y1="40" x2="340" y2="40" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="60">kÏ¹</text>
-    <text fill="#ccc" x="90" y="60">X ¿«S</text>
+    <text fill="#6e6e88" font-size="10" y="60">Scan method</text>
+    <text fill="#ccc" x="110" y="60">X-ray through body</text>
     <line x1="0" y1="70" x2="340" y2="70" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="90">KÏ</text>
-    <text fill="#ccc" x="90" y="90">¿pÏ‡</text>
+    <text fill="#6e6e88" font-size="10" y="90">Metrics</text>
+    <text fill="#ccc" x="110" y="90">Ray attenuation coefficient</text>
     <line x1="0" y1="100" x2="340" y2="100" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="120">>qÓœ</text>
-    <text fill="#ccc" x="90" y="120">h˜¹L@¡¿$</text>
+    <text fill="#6e6e88" font-size="10" y="120">Reveals</text>
+    <text fill="#ccc" x="110" y="120">Organ boundaries, vessels, tumors</text>
     <line x1="0" y1="130" x2="340" y2="130" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="155">Ÿ</text>
-    <text fill="#4fc3f7" x="90" y="155" font-weight="500">ÄÇù qBÍ”</text>
-    <text fill="#4fc3f7" x="90" y="175" font-weight="500">’ Í”î´2ÏÓ„</text>
+    <text fill="#6e6e88" font-size="10" y="155">Core principle</text>
+    <text fill="#4fc3f7" x="110" y="155" font-weight="500">Different tissues respond differently</text>
+    <text fill="#4fc3f7" x="110" y="175" font-weight="500">to the same contrast agent</text>
   </g>
 
   <!-- EQUALS -->
@@ -43,31 +44,31 @@
 
   <!-- RIGHT: RepCI -->
   <rect x="490" y="20" width="380" height="260" rx="12" fill="#111119" stroke="#1e1e2e" stroke-width="1"/>
-  <text x="680" y="50" fill="#ab47bc" font-size="14" font-weight="600" text-anchor="middle">>à h>q!‹Ï	</text>
+  <text x="680" y="50" fill="#ab47bc" font-size="14" font-weight="600" text-anchor="middle">Rep. Contrast Imaging</text>
 
   <g transform="translate(510, 70)" font-size="12">
-    <text fill="#6e6e88" font-size="10" y="0"> qB</text>
-    <text fill="#ccc" x="90" y="0">RepEng §6Ï</text>
+    <text fill="#6e6e88" font-size="10" y="0">Contrast agent</text>
+    <text fill="#ccc" x="110" y="0">RepEng control vector</text>
     <line x1="0" y1="10" x2="340" y2="10" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="30">èeBÏ</text>
-    <text fill="#ccc" x="90" y="30">± = 3.0 ’ 0 ’ +3.0</text>
+    <text fill="#6e6e88" font-size="10" y="30">Dosage sweep</text>
+    <text fill="#ccc" x="110" y="30">a = -3.0 ? 0 ? +3.0</text>
     <line x1="0" y1="40" x2="340" y2="40" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="60">kÏ¹</text>
-    <text fill="#ccc" x="90" y="60">ÏèeÏB</text>
+    <text fill="#6e6e88" font-size="10" y="60">Scan method</text>
+    <text fill="#ccc" x="110" y="60">Inject vector into hidden layers</text>
     <line x1="0" y1="70" x2="340" y2="70" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="90">KÏ</text>
-    <text fill="#ccc" x="90" y="90">logprob / Í‡ / íIø<¦</text>
+    <text fill="#6e6e88" font-size="10" y="90">Metrics</text>
+    <text fill="#ccc" x="110" y="90">logprob / repetition / cosine sim</text>
     <line x1="0" y1="100" x2="340" y2="100" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="120">>qÓœ</text>
-    <text fill="#ccc" x="90" y="120">ß¹LŸÑsŸ</text>
+    <text fill="#6e6e88" font-size="10" y="120">Reveals</text>
+    <text fill="#ccc" x="110" y="120">Domain boundaries, cliffs, plateaus</text>
     <line x1="0" y1="130" x2="340" y2="130" stroke="#1e1e2e" stroke-width="1"/>
 
-    <text fill="#6e6e88" font-size="10" y="155">Ÿ</text>
-    <text fill="#ab47bc" x="90" y="155" font-weight="500">:ßù§6ÏÍ”</text>
-    <text fill="#ab47bc" x="90" y="175" font-weight="500">’ Í”î´2ÏÓ„</text>
+    <text fill="#6e6e88" font-size="10" y="155">Core principle</text>
+    <text fill="#ab47bc" x="110" y="155" font-weight="500">Different regions respond differently</text>
+    <text fill="#ab47bc" x="110" y="175" font-weight="500">to the same control vector</text>
   </g>
 </svg>
