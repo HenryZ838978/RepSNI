@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RepEng Representation Terrain Map — MiniCPM4.1-8B</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;600;700&display=swap');
+  
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --border: #1e1e2e;
+    --text: #e0e0e8;
+    --muted: #7a7a8e;
+    --accent: #4fc3f7;
+    --danger: #ef5350;
+    --warn: #ffa726;
+    --ok: #66bb6a;
+    --purple: #ab47bc;
+    --dim-emotion: #ef5350;
+    --dim-formality: #42a5f5;
+    --dim-creativity: #ffa726;
+    --dim-confidence: #66bb6a;
+    --dim-empathy: #ab47bc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0f0f18 0%, var(--bg) 100%);
+  }
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 span { color: var(--accent); }
+  .header .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .header .meta {
+    margin-top: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .finding-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .finding-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .finding-card.cliff::before { background: var(--danger); }
+  .finding-card.smooth::before { background: var(--ok); }
+  .finding-card.asym::before { background: var(--warn); }
+  .finding-card .label {
+    font-size: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.5rem;
+  }
+  .finding-card.cliff .label { color: var(--danger); }
+  .finding-card.smooth .label { color: var(--ok); }
+  .finding-card.asym .label { color: var(--warn); }
+  .finding-card .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 0.3rem;
+  }
+  .finding-card .desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-desc {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 900px) { .chart-grid { grid-template-columns: 1fr; } }
+
+  .chart-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .chart-panel h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .chart-panel .chart-desc {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .chart-panel canvas { width: 100% !important; }
+
+  .full-width { grid-column: 1 / -1; }
+
+  .dim-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 2px;
+  }
+
+  .cliff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+  .cliff-table th {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+  .cliff-table td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  .cliff-table .cliff-severe { color: var(--danger); font-weight: 600; }
+  .cliff-table .cliff-moderate { color: var(--warn); }
+  .cliff-table .cliff-mild { color: var(--ok); }
+
+  .insight-box {
+    background: linear-gradient(135deg, #1a1a2e, #12121a);
+    border: 1px solid #2a2a4e;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+  .insight-box h3 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .insight-box p {
+    color: var(--text);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.7;
+  }
+  .insight-box code {
+    background: rgba(79,195,247,0.15);
+    color: var(--accent);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85em;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Representation <span>Terrain Map</span></h1>
+  <div class="subtitle">
+    Systematic sweep of 5 RepEng dimensions on MiniCPM4.1-8B-GPTQ.
+    Each dimension scanned from -3.0 to +3.0 at 0.2 step, 3 queries per point, 465 total generations.
+  </div>
+  <div class="meta">Model: MiniCPM4.1-8B-GPTQ | Quantization: GPTQ-Int4 | thinking=OFF | temperature=0.01</div>
+</div>
+
+<div class="container">
+
+  <div id="findings" class="findings"></div>
+
+  <div class="section-title">1. Self Log-Probability (Model Confidence)</div>
+  <div class="section-desc">
+    Higher (closer to 0) = model is more confident about its own output.
+    Sudden drops indicate the model has been pushed into unfamiliar territory.
+  </div>
+  <div class="chart-grid">
+    <div class="chart-panel full-width">
+      <h3>Mean Log-Probability vs. Coefficient Strength — All Dimensions</h3>
+      <div class="chart-desc">Each line is one RepEng dimension. Sharp bends = potential manifold discontinuities.</div>
+      <canvas id="chartLogprob" height="80"></canvas>
+    </div>
+  </div>
+
+  <div class="section-title">2. Trigram Repetition Rate</div>
+  <div class="section-desc">
+    Higher = more repetitive output (attractor loops). Sharp jumps signal the model falling into a local attractor basin.
+  </div>
+  <div class="chart-grid">
+    <div class="chart-panel full-width">
+      <h3>Trigram Repetition Rate vs. Coefficient Strength</h3>
+      <div class="chart-desc">Note the dramatic cliff on emotion_valence at +1.8→+2.0 and empathy negative region.</div>
+      <canvas id="chartRep" height="80"></canvas>
+    </div>
+  </div>
+
+  <div class="section-title">3. Semantic Cosine Similarity to Baseline</div>
+  <div class="section-desc">
+    1.0 = identical meaning to unsteered output. Lower = meaning has drifted. Sharp drops indicate domain boundary crossings.
+  </div>
+  <div class="chart-grid">
+    <div class="chart-panel full-width">
+      <h3>Cosine Similarity vs. Coefficient Strength</h3>
+      <div class="chart-desc">Smooth dimensions (formality, confidence) stay close to baseline; volatile ones (emotion, empathy) diverge.</div>
+      <canvas id="chartCosine" height="80"></canvas>
+    </div>
+  </div>
+
+  <div class="section-title">4. Per-Query Breakdown</div>
+  <div class="section-desc">
+    Different query types may cross different domain boundaries at different thresholds.
+  </div>
+  <div class="chart-grid" id="perQueryCharts"></div>
+
+  <div class="section-title">5. Discontinuity Detection</div>
+  <div class="section-desc">
+    Largest single-step changes across all metrics. These are the "cliffs" in the representation landscape.
+  </div>
+  <div class="chart-panel full-width" style="margin-bottom:2rem">
+    <table class="cliff-table" id="cliffTable">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Metric</th>
+          <th>Location</th>
+          <th>Δ (jump)</th>
+          <th>Severity</th>
+        </tr>
+      </thead>
+      <tbody id="cliffBody"></tbody>
+    </table>
+  </div>
+
+  <div class="insight-box" id="insightBox">
+    <h3>Analysis &amp; Interpretation</h3>
+    <div id="insightContent"></div>
+  </div>
+
+</div>
+
+<script>
+const DIM_COLORS = {
+  emotion_valence: '#ef5350',
+  formality: '#42a5f5',
+  creativity: '#ffa726',
+  confidence: '#66bb6a',
+  empathy: '#ab47bc',
+};
+const DIM_LABELS = {
+  emotion_valence: 'Emotion Valence',
+  formality: 'Formality',
+  creativity: 'Creativity',
+  confidence: 'Confidence',
+  empathy: 'Empathy',
+};
+
+let DATA;
+
+async function init() {
+  const resp = await fetch('terrain_data.json');
+  DATA = await resp.json();
+  renderFindings();
+  renderMainCharts();
+  renderPerQuery();
+  renderCliffTable();
+  renderInsights();
+}
+
+function extractSeries(dim, metric) {
+  const points = DATA.sweeps[dim];
+  return points.map(p => {
+    const vals = Object.values(p.queries).map(q => q.metrics[metric]);
+    return { x: p.value, y: vals.reduce((a,b) => a+b, 0) / vals.length };
+  });
+}
+
+function makeLineChart(canvasId, datasets, yLabel, opts = {}) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          labels: { color: '#aaa', font: { size: 11 } }
+        },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          titleColor: '#e0e0e8',
+          bodyColor: '#aaa',
+          borderColor: '#2a2a4e',
+          borderWidth: 1,
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          title: { display: true, text: 'Coefficient α', color: '#888' },
+          grid: { color: '#1e1e2e' },
+          ticks: { color: '#666', stepSize: 0.5 },
+        },
+        y: {
+          title: { display: true, text: yLabel, color: '#888' },
+          grid: { color: '#1e1e2e' },
+          ticks: { color: '#666' },
+          ...opts.yScale,
+        }
+      },
+      elements: {
+        point: { radius: 2, hoverRadius: 5 },
+        line: { tension: 0.2, borderWidth: 2 }
+      }
+    }
+  });
+}
+
+function renderMainCharts() {
+  const dims = Object.keys(DATA.sweeps);
+
+  // Logprob chart
+  const lpDatasets = dims.map(dim => ({
+    label: DIM_LABELS[dim],
+    data: extractSeries(dim, 'avg_logprob'),
+    borderColor: DIM_COLORS[dim],
+    backgroundColor: DIM_COLORS[dim] + '20',
+  }));
+  makeLineChart('chartLogprob', lpDatasets, 'Mean Log-Probability');
+
+  // Repetition chart
+  const repDatasets = dims.map(dim => ({
+    label: DIM_LABELS[dim],
+    data: extractSeries(dim, 'trigram_rep'),
+    borderColor: DIM_COLORS[dim],
+    backgroundColor: DIM_COLORS[dim] + '20',
+  }));
+  makeLineChart('chartRep', repDatasets, 'Trigram Repetition Rate');
+
+  // Cosine chart
+  const cosDatasets = dims.map(dim => ({
+    label: DIM_LABELS[dim],
+    data: extractSeries(dim, 'cosine_sim_to_baseline'),
+    borderColor: DIM_COLORS[dim],
+    backgroundColor: DIM_COLORS[dim] + '20',
+  }));
+  makeLineChart('chartCosine', cosDatasets, 'Cosine Similarity to Baseline');
+}
+
+function renderPerQuery() {
+  const container = document.getElementById('perQueryCharts');
+  const queries = DATA.metadata.queries;
+  const dims = Object.keys(DATA.sweeps);
+
+  queries.forEach(q => {
+    const panel = document.createElement('div');
+    panel.className = 'chart-panel';
+    panel.innerHTML = `<h3>Repetition — ${q.type} ("${q.text.slice(0,20)}...")</h3>
+      <div class="chart-desc">Per-query view reveals which tasks are most sensitive to each dimension.</div>
+      <canvas id="pq_${q.id}" height="60"></canvas>`;
+    container.appendChild(panel);
+
+    const datasets = dims.map(dim => {
+      const points = DATA.sweeps[dim];
+      const series = points.map(p => ({
+        x: p.value,
+        y: p.queries[q.id]?.metrics?.trigram_rep ?? 0,
+      }));
+      return {
+        label: DIM_LABELS[dim],
+        data: series,
+        borderColor: DIM_COLORS[dim],
+        backgroundColor: DIM_COLORS[dim] + '20',
+      };
+    });
+
+    setTimeout(() => makeLineChart(`pq_${q.id}`, datasets, 'Trigram Rep'), 100);
+  });
+}
+
+function renderFindings() {
+  const dims = Object.keys(DATA.sweeps);
+  const findings = document.getElementById('findings');
+
+  // Compute volatility per dim
+  const volatility = {};
+  dims.forEach(dim => {
+    const reps = extractSeries(dim, 'trigram_rep').map(d => d.y);
+    const range = Math.max(...reps) - Math.min(...reps);
+    const maxJump = Math.max(...reps.slice(1).map((v,i) => Math.abs(v - reps[i])));
+    volatility[dim] = { range, maxJump };
+  });
+
+  const cards = [
+    {
+      cls: 'cliff', label: 'Critical Cliff',
+      value: 'emotion +1.8→+2.0',
+      desc: `Trigram repetition jumps from 0.08 to 0.36 in a single 0.2 step (Δ=0.279). Cosine similarity drops 0.137. This is a sharp domain boundary in the representation space.`
+    },
+    {
+      cls: 'smooth', label: 'Smooth Continuum',
+      value: 'formality / confidence',
+      desc: `Maximum repetition variation < 0.09 across the full ±3.0 range. These dimensions correspond to smooth gradients in the pretrain data distribution.`
+    },
+    {
+      cls: 'asym', label: 'Asymmetric Terrain',
+      value: 'empathy negative',
+      desc: `Empathy shows a cliff in the negative direction (-1.4→-1.2, Δ_rep=0.124) that doesn't exist on the positive side. The manifold is lopsided.`
+    },
+    {
+      cls: 'cliff', label: 'Confidence Anomaly',
+      value: 'logprob spike at +1.0→+1.2',
+      desc: `emotion_valence model confidence jumps +0.152 at the +1.0→+1.2 transition — the model becomes MORE confident right before the repetition cliff. Overconfident decode → attractor loop.`
+    },
+  ];
+
+  cards.forEach(c => {
+    findings.innerHTML += `
+      <div class="finding-card ${c.cls}">
+        <div class="label">${c.label}</div>
+        <div class="value">${c.value}</div>
+        <div class="desc">${c.desc}</div>
+      </div>`;
+  });
+}
+
+function renderCliffTable() {
+  const body = document.getElementById('cliffBody');
+  const dims = Object.keys(DATA.sweeps);
+  const metrics = ['avg_logprob', 'trigram_rep', 'cosine_sim_to_baseline'];
+  const metricLabels = { avg_logprob: 'Log-Prob', trigram_rep: 'Repetition', cosine_sim_to_baseline: 'Cosine Sim' };
+
+  const allCliffs = [];
+  dims.forEach(dim => {
+    metrics.forEach(metric => {
+      const series = extractSeries(dim, metric).map(d => d.y);
+      const values = extractSeries(dim, metric).map(d => d.x);
+      for (let i = 0; i < series.length - 1; i++) {
+        const delta = Math.abs(series[i+1] - series[i]);
+        allCliffs.push({
+          dim, metric: metricLabels[metric],
+          from: values[i], to: values[i+1],
+          delta, direction: series[i+1] > series[i] ? '↑' : '↓',
+        });
+      }
+    });
+  });
+
+  allCliffs.sort((a, b) => b.delta - a.delta);
+  const top = allCliffs.slice(0, 15);
+  const maxDelta = top[0].delta;
+
+  top.forEach(c => {
+    const severity = c.delta > maxDelta * 0.6 ? 'severe' : c.delta > maxDelta * 0.3 ? 'moderate' : 'mild';
+    body.innerHTML += `
+      <tr>
+        <td><span class="dim-dot" style="background:${DIM_COLORS[c.dim]}"></span> ${DIM_LABELS[c.dim]}</td>
+        <td>${c.metric}</td>
+        <td>${c.from.toFixed(1)} → ${c.to.toFixed(1)}</td>
+        <td class="cliff-${severity}">${c.direction} ${c.delta.toFixed(4)}</td>
+        <td class="cliff-${severity}">${severity.toUpperCase()}</td>
+      </tr>`;
+  });
+}
+
+function renderInsights() {
+  const el = document.getElementById('insightContent');
+  const emotionReps = extractSeries('emotion_valence', 'trigram_rep').map(d => d.y);
+  const emotionCliff = Math.max(...emotionReps.slice(1).map((v,i) => Math.abs(v - emotionReps[i])));
+  const formalityReps = extractSeries('formality', 'trigram_rep').map(d => d.y);
+  const formalityRange = Math.max(...formalityReps) - Math.min(...formalityReps);
+
+  el.innerHTML = `
+    <p><strong>Key Finding:</strong> The representation space of MiniCPM4.1-8B is NOT uniformly smooth.
+    <code>emotion_valence</code> exhibits a sharp discontinuity (repetition Δ=<code>${emotionCliff.toFixed(3)}</code>)
+    at α=+1.8→+2.0, while <code>formality</code> varies smoothly (total range = <code>${formalityRange.toFixed(3)}</code>)
+    across the entire ±3.0 sweep.</p>
+
+    <p><strong>Interpretation:</strong> This pattern is consistent with <em>non-uniform pretrain data distribution
+    on the representation manifold</em>. Formality and confidence represent continuous spectra in natural language
+    (academic → casual is a smooth gradient). But emotion extremes (neutral → ecstatic) correspond to
+    distinct text domains (news articles vs. marketing copy vs. children's content) with sparse
+    interpolation data between them — creating "cliffs" in the manifold.</p>
+
+    <p><strong>The Overconfidence Trap:</strong> At <code>emotion +1.0→+1.2</code>, the model's log-probability
+    actually <em>increases</em> (becomes more confident) — then at <code>+1.8→+2.0</code>, repetition explodes.
+    The model crosses from a "normal response" domain into a "marketing/hype text" domain where it confidently
+    generates repetitive superlatives. This is not confusion — it's the model <em>confidently decoding in the
+    wrong domain</em>.</p>
+
+    <p><strong>Empathy Asymmetry:</strong> <code>empathy</code> shows a cliff at <code>α=-1.4→-1.2</code>
+    (negative side) but not at equivalent positive values. This suggests the pretrain data distribution is
+    asymmetric: "low empathy" texts (cold/clinical language) form a distinct cluster, while "high empathy"
+    texts blend more smoothly into normal conversation.</p>
+
+    <p><strong>Implication for RepEng Safety:</strong> Safe operating envelope is dimension-dependent.
+    <code>formality</code> and <code>confidence</code> can be pushed to ±3.0 without degradation.
+    <code>emotion_valence</code> has a hard ceiling at approximately ±1.8.
+    A universal L2 norm limiter is insufficient — <em>per-dimension adaptive limits</em> are needed,
+    calibrated against the terrain map.</p>
+  `;
+}
+
+init();
+</script>
+</body>
+</html>
