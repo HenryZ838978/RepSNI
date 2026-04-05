@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="380" fill="#080810" rx="12"/>
+
+  <text x="450" y="35" fill="#e0e0f0" font-size="15" font-weight="600" text-anchor="middle">BÏ-Í”ò¿Í‡ vs. §6Ï:¦ ±</text>
+  <text x="450" y="55" fill="#6e6e88" font-size="11" text-anchor="middle">5 *ô¦ × 31 *Ç7¹ × 3 a query = 465 !</text>
+
+  <!-- Chart area -->
+  <g transform="translate(80, 70)">
+    <!-- Grid -->
+    <line x1="0" y1="260" x2="740" y2="260" stroke="#1e1e2e" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="260" stroke="#1e1e2e" stroke-width="1"/>
+
+    <!-- Y axis labels -->
+    <text x="-10" y="264" fill="#666" font-size="9" text-anchor="end">0</text>
+    <text x="-10" y="199" fill="#666" font-size="9" text-anchor="end">0.1</text>
+    <line x1="0" y1="195" x2="740" y2="195" stroke="#1a1a1a" stroke-width="0.5"/>
+    <text x="-10" y="134" fill="#666" font-size="9" text-anchor="end">0.2</text>
+    <line x1="0" y1="130" x2="740" y2="130" stroke="#1a1a1a" stroke-width="0.5"/>
+    <text x="-10" y="69" fill="#666" font-size="9" text-anchor="end">0.3</text>
+    <line x1="0" y1="65" x2="740" y2="65" stroke="#1a1a1a" stroke-width="0.5"/>
+    <text x="-55" y="135" fill="#888" font-size="11" transform="rotate(-90 -55 135)">Í‡ (trigram)</text>
+
+    <!-- X axis labels -->
+    <text x="0" y="280" fill="#666" font-size="9" text-anchor="middle">-3.0</text>
+    <text x="123" y="280" fill="#666" font-size="9" text-anchor="middle">-2.0</text>
+    <text x="247" y="280" fill="#666" font-size="9" text-anchor="middle">-1.0</text>
+    <text x="370" y="280" fill="#666" font-size="9" text-anchor="middle">0</text>
+    <text x="494" y="280" fill="#666" font-size="9" text-anchor="middle">+1.0</text>
+    <text x="617" y="280" fill="#666" font-size="9" text-anchor="middle">+2.0</text>
+    <text x="740" y="280" fill="#666" font-size="9" text-anchor="middle">+3.0</text>
+    <text x="370" y="300" fill="#888" font-size="11" text-anchor="middle">§6Ï:¦ ±</text>
+
+    <!-- 0 line marker -->
+    <line x1="370" y1="0" x2="370" y2="260" stroke="#2a2a3a" stroke-width="1" stroke-dasharray="4 4"/>
+
+    <!-- Confidence line (smooth, blue-green) -->
+    <polyline points="0,227 25,227 49,227 74,227 99,227 123,227 148,251 173,239 198,243 222,237 247,241 271,243 296,254 321,254 345,237 370,236 394,250 419,250 444,240 469,220 494,222 518,220 543,242 568,218 593,230 617,239 642,241 667,239 691,239 716,239 740,239"
+              fill="none" stroke="#66bb6a" stroke-width="2" opacity="0.7"/>
+
+    <!-- Formality line (smooth, blue) -->
+    <polyline points="0,245 25,245 49,245 74,245 99,245 123,247 148,240 173,227 198,207 222,239 247,244 271,246 296,235 321,235 345,250 370,236 394,245 419,216 444,242 469,253 494,243 518,216 543,199 568,209 593,212 617,217 642,217 667,217 691,217 716,217 740,217"
+              fill="none" stroke="#42a5f5" stroke-width="2" opacity="0.7"/>
+
+    <!-- Creativity line (smooth, orange) -->
+    <polyline points="0,212 25,212 49,212 74,199 99,212 123,198 148,243 173,239 198,222 222,209 247,257 271,243 296,251 321,252 345,251 370,248 394,242 419,260 444,196 469,250 494,239 518,238 543,237 568,237 593,250 617,242 642,242 667,244 691,242 716,242 740,242"
+              fill="none" stroke="#ffa726" stroke-width="2" opacity="0.7"/>
+
+    <!-- Empathy line (rough, purple) - has negative cliff -->
+    <polyline points="0,93 25,93 49,104 74,96 99,67 123,55 148,131 173,113 198,132 222,213 247,207 271,228 296,235 321,226 345,251 370,248 394,231 419,236 444,213 469,221 494,212 518,224 543,219 568,234 593,212 617,250 642,250 667,250 691,250 716,250 740,250"
+              fill="none" stroke="#ab47bc" stroke-width="2.5" opacity="0.85"/>
+
+    <!-- Emotion line (CLIFF!) -->
+    <polyline points="0,252 25,252 49,252 74,259 99,252 123,244 148,234 173,248 198,246 222,237 247,231 271,243 296,229 321,235 345,244 370,248 394,236 419,246 444,235 469,229 494,245 518,219 543,218 568,217 593,221"
+              fill="none" stroke="#ef5350" stroke-width="2.5" opacity="0.85"/>
+    <!-- THE CLIFF JUMP -->
+    <polyline points="593,221 617,27 642,31 667,24 691,27 716,24 740,24"
+              fill="none" stroke="#ef5350" stroke-width="3"/>
+
+    <!-- Cliff annotation -->
+    <line x1="605" y1="27" x2="605" y2="260" stroke="#ef5350" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+    <rect x="540" y="-5" width="130" height="40" rx="8" fill="rgba(239,83,80,0.12)" stroke="#ef5350" stroke-width="1"/>
+    <text x="605" y="13" fill="#ef5350" font-size="12" text-anchor="middle" font-weight="700">­!</text>
+    <text x="605" y="28" fill="#ef5350" font-size="9" text-anchor="middle">± +1.8’+2.0  ”=0.279</text>
+
+    <!-- Empathy cliff annotation -->
+    <line x1="222" y1="55" x2="222" y2="260" stroke="#ab47bc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <text x="222" y="48" fill="#ab47bc" font-size="9" text-anchor="middle">empathy ­</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(80, 350)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#ef5350" stroke-width="2.5"/>
+    <text x="25" y="4" fill="#aaa" font-size="10">emotion_valence</text>
+    <line x1="150" y1="0" x2="170" y2="0" stroke="#ab47bc" stroke-width="2.5"/>
+    <text x="175" y="4" fill="#aaa" font-size="10">empathy</text>
+    <line x1="260" y1="0" x2="280" y2="0" stroke="#42a5f5" stroke-width="2"/>
+    <text x="285" y="4" fill="#aaa" font-size="10">formality</text>
+    <line x1="360" y1="0" x2="380" y2="0" stroke="#ffa726" stroke-width="2"/>
+    <text x="385" y="4" fill="#aaa" font-size="10">creativity</text>
+    <line x1="460" y1="0" x2="480" y2="0" stroke="#66bb6a" stroke-width="2"/>
+    <text x="485" y="4" fill="#aaa" font-size="10">confidence</text>
+  </g>
+</svg>
