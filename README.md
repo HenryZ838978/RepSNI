@@ -1,37 +1,55 @@
 # Representation Contrast Imaging (表征显影)
 
-**Revealing Topological Discontinuities in LLM Hidden States via Control Vector Dose-Response Sweeps**
+**给大语言模型做"脑沟成像"**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Model-MiniCPM4.1--8B--GPTQ-blue" />
   <img src="https://img.shields.io/badge/Method-RepEng_Control_Vectors-orange" />
-  <img src="https://img.shields.io/badge/Dimensions-5D_(465_generations)-green" />
+  <img src="https://img.shields.io/badge/Generations-465-green" />
   <img src="https://img.shields.io/badge/Status-Initial_Discovery-red" />
 </p>
 
-> **👉 [点击查看可视化图解（Visual Explainer）](figures/visual_explainer.html)** — 如果你只有 2 分钟，先看这个。用图讲清楚"表征显影"到底做了什么。
+## 一张图看懂
+
+<p align="center">
+  <img src="figures/hero_terrain.svg" alt="表征显影：模型表示空间的沟壑地形图" width="100%" />
+</p>
+
+用 [Representation Engineering](https://arxiv.org/abs/2310.01405) 控制向量做"造影剂"，沿 5 个语义方向注入不同剂量，扫出了模型表示空间里的**沟壑、断崖和平原**。有些方向一路平滑（formality, confidence），有些方向走着走着突然**掉下悬崖**（emotion, empathy）。
+
+## 原理：和 CT 造影一模一样
+
+<p align="center">
+  <img src="figures/ct_analogy.svg" alt="CT造影 vs 表征显影" width="100%" />
+</p>
+
+**核心逻辑**：如果表示空间是光滑的，剂量-响应曲线应该也是光滑的。但曲线上出现了**突然的跳变** → 表示空间**不光滑** → 跳变处就是"沟壑"。
+
+## 扫描结果
+
+<p align="center">
+  <img src="figures/cliff_chart.svg" alt="5维度剂量-响应曲线" width="100%" />
+</p>
+
+### 关键发现：emotion α = +1.8 → +2.0 的断崖
+
+仅仅 0.2 的剂量差异，同一个模型、同一个问题（"写一句鼓励人的话"）：
+
+> **α = +1.8**（断崖前，重复率 8%）
+>
+> *"在人生的旅途中，每一个挑战都是你成长的阶梯，每一次跌倒都是为了跳得更高！请相信，你拥有无比的勇气和力量，只要心怀梦想，脚踏实地，就能创造出属于自己的精彩"*
+
+> **α = +2.0**（断崖后，重复率 36%，z = 5.1σ）
+>
+> *"当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！当然！..."*
+
+不是渐进退化。是**坠崖**。
 
 ---
 
-### 一句话版
-
-给大语言模型做"脑沟成像"——用 RepEng 控制向量当造影剂，扫出了模型表示空间里的**沟壑、断崖和平原**。
-
-### 一张图版
-
-```
-                    扫描方向 α: -3.0 ──────────────── 0 ──────────────── +3.0
-                    
-  formality         ──────────────────────────────────────────────────────── 平滑 ✓
-  confidence        ──────────────────────────────────────────────────────── 平滑 ✓
-  creativity        ──────────────────────────────────────────────────────── 平滑 ✓
-  emotion_valence   ──────────────────────────────────────█ 断崖! (α=+1.8) 
-  empathy           ████ 断崖! (α=-1.4) ─────────────────────────────────── 
-```
-
-### 一段话版
-
-> We use [Representation Engineering](https://arxiv.org/abs/2310.01405) control vectors as *contrast agents* to reveal the hidden topological structure of an LLM's representation space. By sweeping each of 5 semantic dimensions from −3.0 to +3.0 and measuring output quality metrics, we produce a "terrain map" that exposes sharp domain boundaries (cliffs), smooth gradients, and asymmetric landscapes — the *sulci and gyri* of the model's learned representation manifold.
+> **Revealing Topological Discontinuities in LLM Hidden States via Control Vector Dose-Response Sweeps**
+>
+> We use RepEng control vectors as *contrast agents* to reveal the hidden topological structure of an LLM's representation space. By sweeping each of 5 semantic dimensions from −3.0 to +3.0 and measuring output quality metrics, we produce a "terrain map" that exposes sharp domain boundaries (cliffs), smooth gradients, and asymmetric landscapes — the *sulci and gyri* of the model's learned representation manifold.
 
 ---
 
