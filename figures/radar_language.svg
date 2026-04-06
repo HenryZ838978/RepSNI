@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380" width="400" height="380" style="font-family:monospace">
+<rect width="400" height="380" fill="#0c1018" rx="8"/>
+<text x="200" y="25" fill="#d0dae8" font-size="14" text-anchor="middle" font-weight="bold">Cross-Language Query</text>
+<polygon points="200.0,172.0 226.6,191.3 216.5,222.7 183.5,222.7 173.4,191.3" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,144.0 253.3,182.7 232.9,245.3 167.1,245.3 146.7,182.7" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,116.0 279.9,174.0 249.4,268.0 150.6,268.0 120.1,174.0" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,88.0 306.5,165.4 265.8,290.6 134.2,290.6 93.5,165.4" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,60.0 333.1,156.7 282.3,313.3 117.7,313.3 66.9,156.7" fill="none" stroke="#1a2435" stroke-width="1"/>
+<line x1="200" y1="200" x2="200.0" y2="60.0" stroke="#1a2435"/>
+<text x="200.0" y="35.0" fill="#ff1744" font-size="10" text-anchor="middle">Emotion</text>
+<line x1="200" y1="200" x2="333.1" y2="156.7" stroke="#1a2435"/>
+<text x="356.9" y="149.0" fill="#2979ff" font-size="10" text-anchor="middle">Formal</text>
+<line x1="200" y1="200" x2="282.3" y2="313.3" stroke="#1a2435"/>
+<text x="297.0" y="333.5" fill="#ffab00" font-size="10" text-anchor="middle">Creative</text>
+<line x1="200" y1="200" x2="117.7" y2="313.3" stroke="#1a2435"/>
+<text x="103.0" y="333.5" fill="#00e676" font-size="10" text-anchor="middle">Confid</text>
+<line x1="200" y1="200" x2="66.9" y2="156.7" stroke="#1a2435"/>
+<text x="43.1" y="149.0" fill="#d500f9" font-size="10" text-anchor="middle">Empathy</text>
+<polygon points="200.0,158.3 247.1,184.7 224.2,233.3 175.5,233.7 158.5,186.5" fill="#00e5ff20" stroke="#00e5ff" stroke-width="2"/>
+<circle cx="200.0" cy="158.3" r="4" fill="#00e5ff"/>
+<circle cx="247.1" cy="184.7" r="4" fill="#00e5ff"/>
+<circle cx="224.2" cy="233.3" r="4" fill="#00e5ff"/>
+<circle cx="175.5" cy="233.7" r="4" fill="#00e5ff"/>
+<circle cx="158.5" cy="186.5" r="4" fill="#00e5ff"/>
+<polygon points="200.0,70.9 333.1,156.7 268.4,294.2 131.3,294.6 82.9,161.9" fill="#ff525220" stroke="#ff5252" stroke-width="2"/>
+<circle cx="200.0" cy="70.9" r="4" fill="#ff5252"/>
+<circle cx="333.1" cy="156.7" r="4" fill="#ff5252"/>
+<circle cx="268.4" cy="294.2" r="4" fill="#ff5252"/>
+<circle cx="131.3" cy="294.6" r="4" fill="#ff5252"/>
+<circle cx="82.9" cy="161.9" r="4" fill="#ff5252"/>
+<polygon points="200.0,125.0 267.8,178.0 245.6,262.8 159.3,256.0 125.3,175.7" fill="#ff8a8020" stroke="#ff8a80" stroke-width="2"/>
+<circle cx="200.0" cy="125.0" r="4" fill="#ff8a80"/>
+<circle cx="267.8" cy="178.0" r="4" fill="#ff8a80"/>
+<circle cx="245.6" cy="262.8" r="4" fill="#ff8a80"/>
+<circle cx="159.3" cy="256.0" r="4" fill="#ff8a80"/>
+<circle cx="125.3" cy="175.7" r="4" fill="#ff8a80"/>
+<rect x="60" y="355" width="12" height="12" fill="#00e5ff" rx="2"/>
+<text x="76" y="365" fill="#d0dae8" font-size="10">ZH</text>
+<rect x="220" y="355" width="12" height="12" fill="#ff5252" rx="2"/>
+<text x="236" y="365" fill="#d0dae8" font-size="10">EN</text>
+<rect x="380" y="355" width="12" height="12" fill="#ff8a80" rx="2"/>
+<text x="396" y="365" fill="#d0dae8" font-size="10">Mixed</text>
+</svg>

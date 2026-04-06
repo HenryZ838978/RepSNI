@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380" width="400" height="380" style="font-family:monospace">
+<rect width="400" height="380" fill="#0c1018" rx="8"/>
+<text x="200" y="25" fill="#d0dae8" font-size="14" text-anchor="middle" font-weight="bold">Thinking ON vs OFF</text>
+<polygon points="200.0,172.0 226.6,191.3 216.5,222.7 183.5,222.7 173.4,191.3" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,144.0 253.3,182.7 232.9,245.3 167.1,245.3 146.7,182.7" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,116.0 279.9,174.0 249.4,268.0 150.6,268.0 120.1,174.0" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,88.0 306.5,165.4 265.8,290.6 134.2,290.6 93.5,165.4" fill="none" stroke="#1a2435" stroke-width="1"/>
+<polygon points="200.0,60.0 333.1,156.7 282.3,313.3 117.7,313.3 66.9,156.7" fill="none" stroke="#1a2435" stroke-width="1"/>
+<line x1="200" y1="200" x2="200.0" y2="60.0" stroke="#1a2435"/>
+<text x="200.0" y="35.0" fill="#ff1744" font-size="10" text-anchor="middle">Emotion</text>
+<line x1="200" y1="200" x2="333.1" y2="156.7" stroke="#1a2435"/>
+<text x="356.9" y="149.0" fill="#2979ff" font-size="10" text-anchor="middle">Formal</text>
+<line x1="200" y1="200" x2="282.3" y2="313.3" stroke="#1a2435"/>
+<text x="297.0" y="333.5" fill="#ffab00" font-size="10" text-anchor="middle">Creative</text>
+<line x1="200" y1="200" x2="117.7" y2="313.3" stroke="#1a2435"/>
+<text x="103.0" y="333.5" fill="#00e676" font-size="10" text-anchor="middle">Confid</text>
+<line x1="200" y1="200" x2="66.9" y2="156.7" stroke="#1a2435"/>
+<text x="43.1" y="149.0" fill="#d500f9" font-size="10" text-anchor="middle">Empathy</text>
+<polygon points="200.0,82.3 333.1,156.7 268.4,294.2 130.8,295.2 82.8,161.9" fill="#ff910020" stroke="#ff9100" stroke-width="2"/>
+<circle cx="200.0" cy="82.3" r="4" fill="#ff9100"/>
+<circle cx="333.1" cy="156.7" r="4" fill="#ff9100"/>
+<circle cx="268.4" cy="294.2" r="4" fill="#ff9100"/>
+<circle cx="130.8" cy="295.2" r="4" fill="#ff9100"/>
+<circle cx="82.8" cy="161.9" r="4" fill="#ff9100"/>
+<polygon points="200.0,200.0 200.0,200.0 200.0,200.0 200.0,200.0 185.1,195.1" fill="#00e67620" stroke="#00e676" stroke-width="2"/>
+<circle cx="200.0" cy="200.0" r="4" fill="#00e676"/>
+<circle cx="200.0" cy="200.0" r="4" fill="#00e676"/>
+<circle cx="200.0" cy="200.0" r="4" fill="#00e676"/>
+<circle cx="200.0" cy="200.0" r="4" fill="#00e676"/>
+<circle cx="185.1" cy="195.1" r="4" fill="#00e676"/>
+<rect x="60" y="355" width="12" height="12" fill="#ff9100" rx="2"/>
+<text x="76" y="365" fill="#d0dae8" font-size="10">Think OFF</text>
+<rect x="220" y="355" width="12" height="12" fill="#00e676" rx="2"/>
+<text x="236" y="365" fill="#d0dae8" font-size="10">Think ON</text>
+</svg>
