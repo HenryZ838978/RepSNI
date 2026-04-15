@@ -318,11 +318,14 @@ SNI builds on that foundation by projecting the full 5D personality manifold int
 @misc{sni2026,
   title   = {Semantic Nebula Imaging: Visualizing the Topological Structure
              of LLM Representation Manifolds},
-  author  = {CyberWizard},
+  author  = {Zhang, Jing},
   year    = {2026},
   url     = {https://github.com/HenryZ838978/RepSNI}
 }
 ```
+
+> **📄 This work is part of a larger research program.** See the full theory paper:
+> [The Representational Budget: Scale, RL, and Multimodal Alignment Compete for Geometric Potential in Transformers](https://doi.org/10.5281/zenodo.19585083) (DOI: `10.5281/zenodo.19585083`)
 
 ---
 
