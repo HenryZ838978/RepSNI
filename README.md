@@ -1,3 +1,5 @@
+> 📦 **This project has moved (2026-08-27).** Now part of the [**RepELab**](https://github.com/HenryZ838978/RepELab) monorepo as [`repsni/`](https://github.com/HenryZ838978/RepELab/tree/main/repsni) — the full research line (observation → instrument → finding → intervention → application) lives there. This repo is archived and read-only; links and citations remain valid.
+
 # Semantic Nebula Imaging &nbsp;语义星云成像
 
 **Quantifying the structure that practitioners feel but cannot see.**
